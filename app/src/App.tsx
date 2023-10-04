@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Components from "./Component";
+import React, { Component } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+// interface MyFormState {
+//   firstName: string;
+//   lastName: string;
+//   age: string;
+// // }
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+class MyForm extends Component {
+  state = {
+    firstName: '',
+    lastName: '',
+    age: '',
+  };
+  handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ firstName: event.target.value });
+  };
+
+  handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ lastName: event.target.value });
+  };
+  handleAgeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ age: parseInt(event.target.value, 10) || 0 });
+  };
+
+  handleSubmit = () => {
+    // const { firstName, lastName, age } = this.state;
+    console.log(this.state)
+  };
+  render() {
+    const{ButtonElement, InputElement}=Components
+    return(
+      <div id="App">
+      <InputElement
+        type="text"
+        placeholder="First Name"
+        value={this.state.firstName}
+        onChange={this.handleFirstNameChange}
+      />
+        <InputElement
+          type="text"
+          placeholder="Last Name"
+          value={this.state.lastName}
+          onChange={this.handleLastNameChange}
+        />
+        <InputElement
+          type="number"
+          placeholder="Age"
+          value={this.state.age}
+          onChange={this.handleAgeChange}
+        />
+        <ButtonElement onClick={this.handleSubmit} label="Submit"/>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    );
+  }
 }
+export default MyForm;
+      
+   
+      
+      
+    
 
-export default App
+   
+
+
+  
+
+  
+
+  
